@@ -1,0 +1,28 @@
+/* Global theme styles and variables */
+
+@import "../fonts/ChampagneLimousines/font.css";
+
+:root {
+  /* base colours */
+  --black: #000;
+  --white: #fff;
+  /* primary colours */
+  /* secondary colours */
+  /* tertiary colours */
+  /* tinted colours */
+  /* gutters */
+  --gutter-s: 20px;
+  --gutter-m: 40px;
+  --gutter-l: 80px;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--black);
+  font-family: "ChampagneLimousines";
+}
+
+.font-bold {
+  font-family: "ChampagneLimousines";
+  font-weight: 300;
+}

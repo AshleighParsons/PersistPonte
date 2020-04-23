@@ -1,0 +1,188 @@
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import styled from "styled-components"
+import Swiper from 'react-id-swiper';
+
+import { PonteApartment } from "../../assets/images/ponte1.jpg"
+import { HillbrowApartment } from "../../assets/images/hillbrow1.jpg"
+import { BereaApartment } from "../../assets/images/berea1.jpg"
+
+const ModalContainer = styled.div`
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: -99;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  &.visible {
+    opacity: 1;
+    z-index: 10;
+  }
+  color: black;
+`
+
+const ModalBox = styled.div`
+  overflow-y: scroll;
+  background-color: #f0f0f0;
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  .relative-container {
+    position: relative;
+    p {
+      font-weight: 600;
+      padding-bottom: 3em;
+      line-height: 1.5em;
+    }
+    .divider {
+      display: inline-block;
+      padding: 0;
+      background-color: #00646c;
+      width: 100px;
+      height: 3px;
+    }
+    .question-1 {
+      padding: 30px 0px 0px 0px;
+    }
+  }
+  .swiper-container {
+    text-align: center;
+    .swiper-wrapper {
+      img {
+        width: auto !important;
+        height: 15em;
+      }
+    }
+    /* .swiper-button-next {
+      color: #f6eec7;
+    }
+    .swiper-button-prev {
+      color: #f6eec7;
+    } */
+  }
+  h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 1.5rem;
+    color: #00646c;
+    font-family: "gotham-bold";
+  }
+  h3 {
+    font-weight: 700;
+    color: #00646c;
+    padding-bottom: 1em;
+  }
+
+  @media (min-width: 768px) {
+    padding: 50px;
+  }
+  a {
+    padding-bottom: 0.2rem;
+    color: black;
+    border-bottom: 0.5px solid black;
+    text-decoration: none;
+    :hover {
+      padding-bottom: 0.1rem;
+      transition: 0.2s ease;
+    }
+  }
+`
+
+const CloseButton = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -20px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  div {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    &.x-one {
+      transform: rotate(45deg);
+      top: 3px;
+      left: 0px;
+    }
+    &.x-two {
+      transform: rotate(-45deg);
+    }
+  }
+  &:hover {
+    opacity: 0.6;
+  }
+  @media (min-width: 768px) {
+    top: 0px;
+    right: 0px;
+  }
+`
+
+class ApartmentModal extends Component {
+  render() {
+    const { onHide, show } = this.props
+    const params = {
+      slidesPerView: "auto",
+      // pagination: {
+      //   el: '.swiper-pagination',
+      //   clickable: true
+      // },
+      loop: true,
+      spaceBetween: 30
+    }
+    return (
+      <ModalContainer className={show ? "visible" : ""}>
+        <ModalBox>
+          <div className="relative-container">
+            <CloseButton
+              onClick={() => {
+                onHide()
+              }}
+            >
+              <div className="x-one" />
+              <div className="x-two" />
+            </CloseButton>
+          </div>
+          <Swiper {...params}>
+            <div>
+              <p>Ponte City Apartment</p>
+              <img src={PonteApartment} />
+              <p>2 Bedroom 1 Bathroom Apartment in Ponte City Available Immediately. Open Plan kitchen with Modern Finishes , Under counter oven and hob, Prepaid Electricity Meter. The building offers 24/7 on site security, Underground parking available and bio-metric Access control.</p>
+              <p>R5000.00 p/m</p>
+              <button>Move In</button>
+            </div>
+            <div>
+              <p>Berea Apartment</p>
+              <img src={PonteApartment} />
+              <p>Spacious ,renovated unit with fitted kitchen and fitted wardrobes.24h security, biometric access and clean safe basement with cctv cameras. About 2 minutes walk to Berea Spar . Building is near school and 300 m walk to Hillbrow Shoprite.</p>
+              <p>R3000.00 p/m</p>
+              <button>Move In</button>
+            </div>
+            <div>
+              <p>Hillbrow Apartment</p>
+              <img src={HillbrowApartment} />
+              <p>Newly renovated bachelor flats at 95 Claim street next to Shoprite Usave on busy taxi route 2 minutes away from High point spar, wifi available, 24 /7 security services, biometrics access control system, dstv port connection, cctv cameras connected.</p>
+              <p>R2400.00 p/m</p>
+              <button>Move In</button>
+            </div>
+          </Swiper>
+        </ModalBox>
+      </ModalContainer>
+    )
+  }
+}
+
+ApartmentModal.propTypes = {
+  onHide: PropTypes.func,
+  show: PropTypes.bool,
+}
+
+export default ApartmentModal
